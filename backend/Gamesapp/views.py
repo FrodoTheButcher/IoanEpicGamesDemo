@@ -28,15 +28,18 @@ class GameView(APIView):
                 game = Game.objects.get(id=pk)
                 serializer = CustomGameSerializer(game,many=False)
                 return Response(Data.ReturnResponse(serializer.data),status=status.HTTP_200_OK)
+              except ObjectDoesNotExist as e:
+                return Response(ErrorMessage.GETBYID_NOTFOUND,status=status.HTTP_500_INTERNAL_SERVER_ERROR)                  
               except Exception as e:
-                return Response({"message":"error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(ErrorMessage.GETBYID_SERVERERROR,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
          else:    
             try:
                 games = Game.objects.all()
                 serializer = CustomGameSerializer(games,many=True)
                 return Response(Data.ReturnResponse(serializer.data),status=status.HTTP_200_OK)
+
             except Exception as e:
-                return Response({"message":"error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(ErrorMessage.GETBYID_SERVERERROR,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
          
     def put(self,request,pk):
          try:
@@ -48,10 +51,8 @@ class GameView(APIView):
             else:
                  serializer_errors = serializer.errors
                  return Response(Data.ReturnResponse(serializer_errors),status=status.HTTP_400_BAD_REQUEST)
-         except ObjectDoesNotExist:
-                 return Response(ErrorMessage.GETBYID_NOTFOUND,status=status.HTTP_400_BAD_REQUEST)
          except Exception as e:
-            return Response({"message":"error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(ErrorMessage.GETBYID_SERVERERROR,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
          
 
     def delete(self,request,pk):

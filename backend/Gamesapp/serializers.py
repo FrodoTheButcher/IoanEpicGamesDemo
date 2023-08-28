@@ -25,6 +25,4 @@ class CustomGameSerializer(serializers.ModelSerializer):
         return gameTagsSerialized.data
 
 
-
-        
     
