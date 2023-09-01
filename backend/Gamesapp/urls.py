@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from . import views
 urlpatterns = [
+    path("getMostRatedGames/",views.getMostRatedGames,name="bestRatedGames"),
     path('<str:pk>/',views.GameView.as_view(),name="games-crud"),
     path('',views.GameView.as_view(),name="games-crud"),
 ]

@@ -8,6 +8,15 @@ from constants import Data , ErrorMessage
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
+@api_view(['GET'])
+def getMostRatedGames(request): 
+    try:
+        games = Game.objects.all().order_by('-rating')[:5]
+        games = GameSerializer(games,many=True)
+        return Response(Data.ReturnResponse(games.data),status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response(ErrorMessage.GETBYID_SERVERERROR,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class GameView(APIView):
     def post(self,request):
