@@ -26,6 +26,6 @@ class Game(models.Model):
     memory = models.FloatField(null=False,blank=False)
     image = models.ImageField(null=True,blank=True)
     introductionVideo = models.CharField(max_length=50,blank=True,null=True)
-
+    multiplayer = models.BooleanField(default=False,blank=True,null=True)
     def __str__(self):
         return self.name
