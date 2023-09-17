@@ -1,0 +1,122 @@
+Internal Server Error: /api/games/1/
+"GET /api/games/1/ HTTP/1.1" 500 56
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 49
+Internal Server Error: /api/users/
+Traceback (most recent call last):
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: UserView.get() missing 1 required positional argument: 'pk'
+"GET /api/users/ HTTP/1.1" 500 20839
+Internal Server Error: /api/users/
+Traceback (most recent call last):
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: UserView.get() missing 1 required positional argument: 'pk'
+"GET /api/users/ HTTP/1.1" 500 20839
+Internal Server Error: /api/users/
+Traceback (most recent call last):
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: UserView.get() missing 1 required positional argument: 'pk'
+"GET /api/users/ HTTP/1.1" 500 20839
+Internal Server Error: /api/users/
+Traceback (most recent call last):
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: UserView.get() missing 1 required positional argument: 'pk'
+"GET /api/users/ HTTP/1.1" 500 20839
+Internal Server Error: /api/users/base/
+Traceback (most recent call last):
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Robi\anaconda3\envs\myflaskenv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: UserView.get() missing 1 required positional argument: 'pk'
+"GET /api/users/base/ HTTP/1.1" 500 20859

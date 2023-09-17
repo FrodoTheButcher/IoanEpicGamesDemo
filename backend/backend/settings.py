@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     "Gamesapp.apps.GamesappConfig",
     "UsersIntercationsapp.apps.UsersintercationsappConfig",
     'corsheaders',
+    'rest_framework_swagger',
+    'drf_yasg',
+
 ]
 
 MIDDLEWARE = [
@@ -159,8 +162,31 @@ REST_FRAMEWORK = {
     
 }
 
-
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': 'error.log',
+            'when': 'midnight',
+            'backupCount': 7,  # Number of backup files to keep
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 
 
 SIMPLE_JWT = {
