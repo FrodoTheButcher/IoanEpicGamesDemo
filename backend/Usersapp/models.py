@@ -5,7 +5,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User,blank=False,null=False,on_delete=models.CASCADE)
     email = models.EmailField(blank=False,null=False,unique=True)
     name = models.CharField(blank=True,null=True,max_length=30)
-    username = models.CharField(blank=False,null=False,max_length=30,unique=True)
     numberOfGames = models.IntegerField(blank=True,null=True)
     accountMoney = models.FloatField(blank=True,null=True)
     isPremium = models.BooleanField(default=False)

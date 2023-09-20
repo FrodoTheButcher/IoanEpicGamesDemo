@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserUpdateSerializer
 import logging
 from drf_yasg.utils import swagger_auto_schema
-
+from .models import Profile
 from drf_yasg import openapi
 
 
@@ -30,7 +30,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
     
 
 
-
 class UserView(APIView):
     @swagger_auto_schema(
             request_body=openapi.Schema(
@@ -49,21 +48,20 @@ class UserView(APIView):
                 status.HTTP_500_INTERNAL_SERVER_ERROR:'Server error',
             }
     )
+   
     def post(self,request):
         try:
-            print("merge")
             data = request.data
-            print("data",data)
-            if data['password'] != data['password2']:
-                return Response(Data.ReturnResponse("Passwords must match"),status=status.HTTP_400_BAD_REQUEST)
-            
             dataForSerializer = {
                 "email":data['email'],
                 "username":data['username'],
                 "password":data['password']
             }
+            context = {
+                "password2":data['password2']
+            }
+            serializer = UserSerializer(data=dataForSerializer,context=context)
             
-            serializer = UserSerializer(data=dataForSerializer)
             if serializer.is_valid():
                 serializer.save()
                 return Response(Data.ReturnResponse("Create success"),status=status.HTTP_200_OK)
