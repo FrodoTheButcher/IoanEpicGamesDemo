@@ -6,6 +6,9 @@ from .models import Game
 from .serializers import GameSerializer, CustomGameSerializer
 from constants import Data , ErrorMessage
 from django.core.exceptions import ObjectDoesNotExist
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
 # Create your views here.
 
 @api_view(['GET'])
@@ -19,6 +22,26 @@ def getMostRatedGames(request):
 
 
 class GameView(APIView):
+    @swagger_auto_schema(
+            request_body=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'name':openapi.Schema(type=openapi.TYPE_STRING),
+                    'age':openapi.Schema(type=openapi.TYPE_INTEGER),
+                    'price':openapi.Schema(type=openapi.TYPE_NUMBER),
+                    'company':openapi.Schema(type=openapi.TYPE_STRING),
+                    'description':openapi.Schema(type=openapi.TYPE_STRING),
+                    'memory':openapi.Schema(type=openapi.TYPE_NUMBER),
+                    'multiplayer':openapi.Schema(type=openapi.TYPE_BOOLEAN),
+
+                },
+            ),
+            responses={
+                status.HTTP_200_OK:'Success',
+                status.HTTP_400_BAD_REQUEST:'Bad data',
+                status.HTTP_500_INTERNAL_SERVER_ERROR:'Server error',
+            }
+    )
     def post(self,request):
         try:
             serializer = GameSerializer(data=request.data)
