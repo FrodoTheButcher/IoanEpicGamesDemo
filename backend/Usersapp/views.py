@@ -71,6 +71,23 @@ class UserView(APIView):
         except Exception as e:
             logging.error("Exception occured in UserView POST",e)
             return Response(ErrorMessage.POST_REQUEST_SERVER,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    @swagger_auto_schema(
+            request_body=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'username':openapi.Schema(type=openapi.TYPE_STRING),
+                    'email':openapi.Schema(type=openapi.TYPE_STRING),
+                    'password':openapi.Schema(type=openapi.TYPE_STRING),
+                    'password2':openapi.Schema(type=openapi.TYPE_STRING),
+                },
+                required=['username','email','password','password2'],
+            ),
+            responses={
+                status.HTTP_200_OK:'Success',
+                status.HTTP_400_BAD_REQUEST:'Bad data',
+                status.HTTP_500_INTERNAL_SERVER_ERROR:'Server error',
+            }
+    )
     def put(self,request,pk):
         try:
             user = User.objects.get(id=pk)
