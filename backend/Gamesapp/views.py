@@ -8,8 +8,8 @@ from constants import Data , ErrorMessage
 from django.core.exceptions import ObjectDoesNotExist
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
-# Create your views here.
 
 @api_view(['GET'])
 def getMostRatedGames(request): 
@@ -97,3 +97,32 @@ class GameView(APIView):
          except Exception as e:
             return Response({"message":"error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    
+@api_view(['GET'])
+def paginateGames(request):
+    try:
+        query = request.query_params.get("keyword")
+        page = request.query_params.get("page")
+        print("query",query)
+        if page[-1] == '/':
+            page = page[0]
+            
+        print("page",page)    
+        if query == None:
+            query = ""       
+        if page == None:
+            page = 1
+            
+        games = Game.objects.filter(name__contains = query).order_by("-downloads")      
+        paginator = Paginator(games,4)  
+        pages = paginator.num_pages  
+        products = paginator.page(int(page))    
+        serializer = GameSerializer(products,many = True)    
+        return Response({"data":serializer.data,"pages":pages},status=status.HTTP_200_OK)
+    
+    except PageNotAnInteger as e:
+        return Response({"massage":"page should be an integer"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    except Exception as e:
+        return Response({"massage":e},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
