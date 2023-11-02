@@ -20,6 +20,7 @@ from django.conf import settings
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
+
 schema_view = get_schema_view(
     openapi.Info(
         title="API",
@@ -34,6 +35,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/games/",include('Gamesapp.urls')),
     path("api/users/",include('Usersapp.urls')),
+    path("api/payments/",include('UsersPaymentApp.urls')),
+    path("api/prices",include('Prices.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

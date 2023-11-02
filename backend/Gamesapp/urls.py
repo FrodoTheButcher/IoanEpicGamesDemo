@@ -18,6 +18,7 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 from . import views
+
 urlpatterns = [
     path('search/',views.paginateGames,name="paginateGames"),
     path("getMostRatedGames/",views.getMostRatedGames,name="bestRatedGames"),

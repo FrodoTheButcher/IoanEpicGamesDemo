@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_swagger',
     'drf_yasg',
-
+    
+    'UsersPaymentApp.apps.UserspaymentappConfig',
+    'Prices.apps.PricesConfig'
 ]
 
 MIDDLEWARE = [
@@ -227,3 +229,4 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+

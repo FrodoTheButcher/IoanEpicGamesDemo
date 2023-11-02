@@ -2,16 +2,16 @@ from django.shortcuts import render
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.decorators import APIView
-from rest_framework.response import Response
 from rest_framework import status
-from constants import *
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserUpdateSerializer
 import logging
 from drf_yasg.utils import swagger_auto_schema
 from .models import Profile
 from drf_yasg import openapi
-
+from django.db.utils import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
+from constants import *
 
 logger = logging.getLogger(__name__)
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -31,6 +31,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 class UserView(APIView):
+    
     @swagger_auto_schema(
             request_body=openapi.Schema(
                 type=openapi.TYPE_OBJECT,
@@ -64,13 +65,13 @@ class UserView(APIView):
             
             if serializer.is_valid():
                 serializer.save()
-                return Response(Data.ReturnResponse("Create success"),status=status.HTTP_200_OK)
+                return ReturnResponse.CreateSuccess()
             else:
                 errors = serializer.error_messages
-                return Response(Data.ReturnResponse(errors),status=status.HTTP_400_BAD_REQUEST)
+                return ReturnResponse.CreateFail(errors)   
         except Exception as e:
-            logging.error("Exception occured in UserView POST",e)
-            return Response(ErrorMessage.POST_REQUEST_SERVER,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return ExceptionHandler.handle_internal_server_error(e,"UserView POST")
+   
     @swagger_auto_schema(
             request_body=openapi.Schema(
                 type=openapi.TYPE_OBJECT,
@@ -94,32 +95,86 @@ class UserView(APIView):
             serializer = UserUpdateSerializer(user,data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return Response(Data.ReturnResponse("Update success"),status=status.HTTP_200_OK)
+                return ReturnResponse.UpdateSuccess()
             else:
                 errors = serializer.error_messages
-                return Response(Data.ReturnResponse(errors),status=status.HTTP_400_BAD_REQUEST)
+                return ReturnResponse.UpdateFail(errors)
         except user.DoesNotExist as e:
-            return Response(ErrorMessage.GETBYID_NOTFOUND,status=status.HTTP_400_BAD_REQUEST)
+            return ExceptionHandler.handle_userNotFound()
         except Exception as e:
             logging.error("Exception occured in UserView PUT",e)
-            return Response(ErrorMessage.POST_REQUEST_SERVER,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return ExceptionHandler.handle_internal_server_error(e,"UserView UPDATE")
       
-            
+
     def get(self,request,pk=None):
         if pk == None:
             try:
                 users = User.objects.all()
                 serializer = UserSerializer(users,many=True)
-                return Response(Data.ReturnResponse(serializer.data),status=status.HTTP_200_OK)
+                return ReturnResponse.GetSuccess(serializer.data)
             except Exception as e:
                 logging.error("Exception occured in UserView GET ALL",e)
-                return Response(ErrorMessage.POST_REQUEST_SERVER,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return ExceptionHandler.handle_internal_server_error(e,"UserView GET")
         else:
             try:
                 users = User.objects.get(id=pk)
                 serializer = UserSerializer(users,many=False)
-                return Response(Data.ReturnResponse(serializer.data),status=status.HTTP_200_OK)
+                return ReturnResponse.GetSuccess(serializer.data)
             except Exception as e:
                 logging.error("Exception occured in UserView GETBYID",e)
-                return Response(ErrorMessage.POST_REQUEST_SERVER,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return ExceptionHandler.handle_internal_server_error(e,"UserView GET")
                 
+    def delete(self,rquest,pk=None):
+        if pk == None:
+            try:
+                users = User.objects.all()
+                users.delete()
+                return ReturnResponse.DeleteSuccess()
+            except IntegrityError as e:
+                return ExceptionHandler.handle_internal_server_error(e,"UserView DELETE")
+        else:
+            try:
+                user = User.objects.get(id = pk)
+                user.delete()
+                return ReturnResponse.DeleteSuccess()
+            except ObjectDoesNotExist:
+                return ExceptionHandler.handle_userNotFound()
+            
+            except Exception as e:
+                return ExceptionHandler.handle_internal_server_error(e,"UserView DELETE")
+            
+
+class PurchaseCoins(APIView):
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type = openapi.TYPE_OBJECT,
+            properties={
+                'coins':openapi.Schema(type=openapi.TYPE_INTEGER)
+            },
+            required=['coins'],
+        ),
+        
+        responses={
+            status.HTTP_200_OK:"Success",
+            status.HTTP_400_BAD_REQUEST:"Bad request",
+            status.HTTP_500_INTERNAL_SERVER_ERROR:"Server error",
+        }        
+    )
+    
+    def post(self,request,pk):
+        try:
+            user = User.objects.get(id = pk)
+            profile_instance = Profile.objects.get(user=user)
+            data = request.data
+            profile_instance.coins += int(data['coins'])
+            profile_instance.save()
+            return ReturnResponse.CreateSuccess()
+        
+        except ObjectDoesNotExist:
+            return ExceptionHandler.handle_userNotFound()
+        
+        except Exception as e:
+            return ExceptionHandler.handle_internal_server_error(e,"PurchaseCoins POST")
+            
+
+            
